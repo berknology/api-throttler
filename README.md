@@ -1,9 +1,9 @@
 API Throttler
 =============
 
-![Build](https://github.com/berknology/api_throttler/workflows/Build/badge.svg)
-![Release](https://github.com/berknology/api_throttler/workflows/Release/badge.svg)
-![PyPi](https://img.shields.io/pypi/v/api_throttler.svg)
+![Build](https://github.com/berknology/api-throttler/workflows/Build/badge.svg)
+![Release](https://github.com/berknology/api-throttler/workflows/Release/badge.svg)
+![PyPi](https://img.shields.io/pypi/v/api-throttler.svg)
 
 
 A Python toolkit to enforce API rate limit on the backend.
