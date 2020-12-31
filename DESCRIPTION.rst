@@ -34,20 +34,19 @@ Then, import the package in your python script and use appropriate throttler cla
             print('API call is throttled')
 
 
-    if __name__ == '__main__':
-        print('Using fixed window API throttler')
-        for i in range(20):
-            print(f'This is the {i}-th second')
-            # Call API in the following i-th seconds
-            if i in {0, 8, 9, 10, 11, 12}:
-                call_api(fixed_window_throttler)
-            time.sleep(1)
+    print('Using fixed window API throttler')
+    for i in range(20):
+        print(f'This is the {i}-th second')
+        # Call API in the following i-th seconds
+        if i in {0, 8, 9, 10, 11, 12}:
+            call_api(fixed_window_throttler)
+        time.sleep(1)
 
-        print('-'*40)
+    print('-'*40)
 
-        print('Using sliding window API throttler')
-        for i in range(20):
-            print(f'This is the {i}-th second')
-            if i in {0, 8, 9, 10, 11, 12}:
-                call_api(sliding_window_throttler)
-            time.sleep(1)
+    print('Using sliding window API throttler')
+    for i in range(20):
+        print(f'This is the {i}-th second')
+        if i in {0, 8, 9, 10, 11, 12}:
+            call_api(sliding_window_throttler)
+        time.sleep(1)
