@@ -6,13 +6,9 @@ def parse_requirements(fn):
         return [req for req in f.read().strip().split('\n') if "#" not in req]
 
 
-parsed_requirements = parse_requirements(
-    'requirements.txt',
-)
+parsed_requirements = parse_requirements('./requirements/prod.txt')
 
-parsed_test_requirements = parse_requirements(
-    'requirements.txt',
-)
+parsed_test_requirements = parse_requirements('./requirements/test.txt')
 
 requirements = [str(ir) for ir in parsed_requirements]
 test_requirements = [str(tr) for tr in parsed_test_requirements]
@@ -47,4 +43,3 @@ setup(
     test_suite='tests',
     tests_require=test_requirements
 )
-
