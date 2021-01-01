@@ -1,2 +1,2 @@
-# For unit test
+-r prod.txt
 unittest-xml-reporting
