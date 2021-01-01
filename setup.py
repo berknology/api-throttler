@@ -14,7 +14,7 @@ requirements = [str(ir) for ir in parsed_requirements]
 test_requirements = [str(tr) for tr in parsed_test_requirements]
 
 
-with open('DESCRIPTION.rst') as description_file:
+with open('README.md') as description_file:
     description = description_file.read()
 
 
@@ -23,6 +23,7 @@ setup(
     version='0.2.1',
     description="A python toolkit to enforce API rate limit on the backend",
     long_description=description,
+    long_description_content_type='text/markdown',
     url='https://github.com/berknology/api-throttler',
     license="BSD license",
     author="He Hao",
