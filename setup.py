@@ -20,7 +20,7 @@ with open('DESCRIPTION.rst') as description_file:
 
 setup(
     name='api_throttler',
-    version='0.1.0',
+    version='0.2.0',
     description="A python toolkit to enforce API rate limit on the backend",
     long_description=description,
     url='https://github.com/berknology/api-throttler',
