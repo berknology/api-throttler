@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+    api_throttler:
+        build:
+            context: ..
+            dockerfile: Dockerfile
+            args:
+                env: test
+        volumes:
+            - ../test_results/:/test_results/
+        command: >
+            bash -c "python -m tests.run_tests"
+
+    redis:
+        image: "redis:6.0.9"
+        container_name: redis_app
