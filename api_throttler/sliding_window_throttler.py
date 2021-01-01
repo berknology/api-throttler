@@ -14,13 +14,13 @@ class SlidingWindowThrottler(Throttler):
     def is_throttled(self, key: str) -> bool:
         """ Return if the API call with a given key is throttled """
         cur_ts = datetime.utcnow()
-        if key not in self.hash_table:
-            self.hash_table[key] = deque([])
-        while self.hash_table[key] and (cur_ts - self.hash_table[key][0] > timedelta(seconds=self.period)):
-            self.hash_table[key].popleft()
+        if key not in self.cache:
+            self.cache[key] = deque([])
+        while self.cache[key] and (cur_ts - self.cache[key][0] > timedelta(seconds=self.period)):
+            self.cache[key].popleft()
 
-        if len(self.hash_table[key]) + 1 > self.calls:
+        if len(self.cache[key]) + 1 > self.calls:
             return True
         else:
-            self.hash_table[key].append(cur_ts)
+            self.cache[key].append(cur_ts)
             return False
