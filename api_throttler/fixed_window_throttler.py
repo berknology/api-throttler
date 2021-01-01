@@ -13,17 +13,17 @@ class FixedWindowThrottler(Throttler):
     def is_throttled(self, key: str) -> bool:
         """ Return if the API call with a given key is throttled """
         if self._is_fresh_call(key):
-            self.hash_table[key] = \
+            self.cache[key] = \
                 {
                     "num_of_calls": 1,
                     "last_call_ts": datetime.utcnow()
                 }
         else:
-            self.hash_table[key]["num_of_calls"] += 1
+            self.cache[key]["num_of_calls"] += 1
 
-        return self.hash_table[key]["num_of_calls"] > self.calls
+        return self.cache[key]["num_of_calls"] > self.calls
 
     def _is_fresh_call(self, key: str) -> bool:
         """ Return True if key not in hash table or the time span is greater than specified period """
-        return (key not in self.hash_table) or \
-               (datetime.utcnow() - self.hash_table[key]["last_call_ts"] > timedelta(seconds=self.period))
+        return (key not in self.cache) or \
+               (datetime.utcnow() - self.cache[key]["last_call_ts"] > timedelta(seconds=self.period))
