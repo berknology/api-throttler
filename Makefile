@@ -30,7 +30,7 @@ help:
 	@echo "bump-batch - use bump2version to bump patch version"
 	@echo "bump-minor - use bump2version to bump minor version"
 	@echo "bump-major - use bump2version to bump major version"
-	@echo "test - run unit tests in local docker container"
+	@echo "test - run unit tests"
 	@echo "run - build and run the web app in local docker container"
 
 clean: clean-build clean-pyc clean-test
@@ -93,7 +93,7 @@ bump-major:
 	bump2version major
 
 test:
-	docker-compose -f docker-compose/docker-compose.test.yml up --build --remove-orphans --abort-on-container-exit
+	python -m tests.run_tests
 
 run:
-	docker-compose -f docker-compose/docker-compose.yml -f docker-compose/docker-compose.local.yml up --build --remove-orphans --abort-on-container-exit
+	docker-compose up --build
