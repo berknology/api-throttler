@@ -1,14 +1,14 @@
 import time
 from unittest import TestCase
 
-import redis
+import fakeredis
 from api_throttler import SlidingWindowThrottlerRedis
 
 
 class TestSlidingWindowThrottler(TestCase):
 
     def setUp(self) -> None:
-        self.cache = redis.Redis(host='redis', port=6379)
+        self.cache = fakeredis.FakeStrictRedis()
         self.throttler = SlidingWindowThrottlerRedis(calls=2, period=5, cache=self.cache)
 
     def tearDown(self) -> None:
