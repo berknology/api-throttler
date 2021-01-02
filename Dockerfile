@@ -4,7 +4,7 @@ WORKDIR /opt
 
 COPY requirements /opt/requirements/
 
-ARG env=prod
+ARG env=dev
 RUN pip install -r requirements/$env.txt
 
 COPY . .
