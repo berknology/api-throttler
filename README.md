@@ -115,3 +115,7 @@ If you would like to try a real example using API served by a Flask app and a re
 ```bash
 docker-compose up --build
 ``` 
+Once the Docker container is up and running, use your browser to open address 
+[http://localhost:5000](http://localhost:5000) or 
+[http://localhost:5000?user=test_user](http://localhost:5000?user=test_user). Quickly refresh your browser several 
+times, and you will see that after 3 times, the API requrest is shown to be throttled.
