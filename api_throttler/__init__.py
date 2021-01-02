@@ -1,4 +1,4 @@
-__version__ = '0.2.2'
+__version__ = '0.3.1'
 
 from .throttler import Throttler
 from .fixed_window_throttler import FixedWindowThrottler

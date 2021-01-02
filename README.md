@@ -30,7 +30,7 @@ To use this API throttler toolkit, first install it using pip:
 pip install api-throttler
 ```
 
-Then, import the package in your python script and call appropriate functions:
+Then, import the package in your python script and use appropriate throttler classes:
 
 ```python
 import time
@@ -68,11 +68,50 @@ for i in range(20):
     time.sleep(1)
 ```
 
+In the above example, the data of the throttler is saved in local memory. If you would like to save it in a redis 
+server, you can use the `FixedWindowThrottlerRedis` and `SlidingWindowThrottlerRedis` classes. The following scripts 
+shows how to use the two classes using [fake redis](https://github.com/jamesls/fakeredis):
 
-In the above example, the data of the throttler is saved in local hash table (dict). If you would like to save it into a 
-redis server, you can use the `FixedWindowThrottlerRedis` and `SlidingWindowThrottlerRedis` classes. Please try the 
-Flask app example in `app.py` using Docker by running `make run` in your terminal if you use Linux or Mac OS. If you use 
-Windows, please run the following command in your command line:
+```python
+import time
+
+import fakeredis
+from api_throttler import Throttler, FixedWindowThrottlerRedis, SlidingWindowThrottlerRedis
+
+cache = fakeredis.FakeStrictRedis()
+
+# Limit 3 calls per 10 seconds
+fixed_window_throttler = FixedWindowThrottlerRedis(calls=3, period=10, cache=cache)
+sliding_window_throttler = SlidingWindowThrottlerRedis(calls=3, period=10, cache=cache)
+
+
+def call_api(throttler: Throttler, key: str = 'some_string_key'):
+    if not throttler.is_throttled(key):
+        print('API call is NOT throttled')
+    else:
+        print('API call is throttled')
+
+
+print('Using fixed window API throttler')
+for i in range(20):
+    print(f'This is the {i}-th second')
+    # Call API in the following i-th seconds
+    if i in {0, 8, 9, 10, 11, 12}:
+        call_api(fixed_window_throttler)
+    time.sleep(1)
+    
+print('-'*40)
+
+print('Using sliding window API throttler')
+for i in range(20):
+    print(f'This is the {i}-th second')
+    if i in {0, 8, 9, 10, 11, 12}:
+        call_api(sliding_window_throttler)
+    time.sleep(1)
+```
+
+If you would like to try a real example using API served by a Flask app and a redis server, please try to run the 
+`app.py` using Docker by typing the following command in your terminal:
 ```bash
-docker-compose -f docker-compose/docker-compose.yml -f docker-compose/docker-compose.local.yml up --build
+docker-compose up --build
 ``` 

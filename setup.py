@@ -20,7 +20,7 @@ with open('README.md') as description_file:
 
 setup(
     name='api_throttler',
-    version='0.2.2',
+    version='0.3.1',
     description="A python toolkit to enforce API rate limit on the backend",
     long_description=description,
     long_description_content_type='text/markdown',
