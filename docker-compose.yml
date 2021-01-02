@@ -3,8 +3,10 @@ version: '3.9'
 services:
   web:
     build:
-      context: ..
+      context: .
       dockerfile: Dockerfile
+    volumes:
+      - .:/opt
     ports:
       - 5000:80
     container_name: web_app
