@@ -7,7 +7,7 @@ API Throttler
 
 
 A Python toolkit to enforce API rate limit on the backend. The toolkit enable the service backend to limit the number of 
-API calls in a specified period, e.g., 15 API calls per 900 seconds. There are four throttler classes in the toolkit:
+API calls in a specified period, e.g., 3 API calls per 2 seconds. There are four throttler classes in the toolkit:
   * FixedWindowThrottler
   * SlidingWindowThrottler
   * FixedWindowThrottlerRedis
@@ -20,7 +20,10 @@ the first feasible request is served as the starting timestamp to determine the 
 following period, while the sliding window throttler uses the current timestamp minus the specified period as the 
 starting timestamp to calculate the number of allowed API calls. The advantage of fixed window throttler is its 
 simplicity, but there could be many API calls allowed if they are at the end of last period and the beginning of the 
-current period. On the other hand, the sliding window throttler could resolve this issue, but it takes more memory. 
+current period. On the other hand, the sliding window throttler could resolve this issue, but it takes more memory. The
+following picture depicts the difference between fixed window throttler and sliding window throttler.
+
+![Comparison between fixed window and sliding window throttlers](./images/comparison.jpg)
 
 
 Usage
